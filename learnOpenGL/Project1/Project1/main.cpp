@@ -1,7 +1,9 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
-
+#include <tchar.h>
+#include <Windows.h>
+#include <Shlwapi.h>
 #include "stb_image.h"
 #include "Shader.h"
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -11,14 +13,21 @@ void processInput(GLFWwindow *window);
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
-const char* vertexPath = "E:\\25-shader\\shader\\shader.vs";
-const char* fragmentPath = "E:\\25-shader\\shader\\shader.fs";
-const char* imgPath = "E:\\25-shader\\res\\container.jpg";
-const char* img2Path = "E:\\25-shader\\res\\awesomeface.png";
+const char* vertexPath = ".\\shader\\shader.vs";
+const char* fragmentPath = ".\\shader\\shader.fs";
+const char* imgPath = ".\\resources\\container.jpg";
+const char* img2Path = ".\\resources\\awesomeface.png";
 const int step = 8;
 
+void getRunTimePath() {
+	TCHAR szDllName[MAX_PATH];
+	GetModuleFileName(NULL, szDllName, MAX_PATH);
+	/*PathRemoveFileSpec(szDllName);*/
+	std::wcout << "path: " << szDllName << std::endl;
+}
 
 int main() {
+	getRunTimePath();
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
